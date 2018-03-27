@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Génération du fichier overlay"
+dtc -O dtb -o CNC-00A0.dtbo -b 0 -@ CNC.dts
+sudo cp CNC-00A0.dtbo /lib/firmware/
+

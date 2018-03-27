@@ -1,0 +1,90 @@
+/*
+ * Copyright (C) 2013 Nathaniel R. Lewis - http://nathanielrlewis.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ * 
+ * CAPE destinée à être implémentée sur une CNC fraiseuse
+ * 
+ */
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+    /* identification */
+    part-number = "CNC";
+    version     = "00A0";
+    
+    /* state the resources this cape uses */
+    exclusive-use =
+            /* the pin header uses */
+            "P9.25",		/* xstep :  0x1AC mode 5*/
+            "P9.27",		/* xdir  :  0x1A4 mode 5*/
+            "P9.28",		/* ystep :  0x19C mode 5*/
+            "P9.29",		/* ydir  :  0x194 mode 5*/
+            "P8.11",		/* zstep :  0x034 mode 6*/
+            "P8.12",		/* zdir  :  0x030 mode 6*/
+            "P8.07",		/* xlim  :  0x090 mode 27*/
+            "P8.09",		/* ylim  :  0x09C mode 27*/
+            "P8.11",		/* zlim  :  0x034 mode 27*/
+            "P8.08",		/* xok   :  0x094 mode 7*/
+            "P8.10",		/* yok   :  0x098 mode 7*/
+            "P8.12";		/* zok   :  0x038 mode 7*/
+
+
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            pinctrl_CNC_PRU: pinctrl_CNC_PRU_pins {
+                pinctrl-single,pins = <					 		
+                		0x1AC 0x05  /* P9_25  PRU 0 out   - xstep */
+       			       	0x1A4 0x05  /* P9_27  PRU 0 out   - xdir */
+       			       	0x19C 0x05  /* P9_28  PRU 0 out   - ystep */
+       			       	0x194 0x05  /* P9_29  PRU 0 out   - ydir */
+		               	0x034 0x06  /* P8_11  PRU 0 out   - zstep */
+		               	0x030 0x06  /* P8_12  PRU 0 out   - zdir */
+                >;
+            };
+        };
+    };
+	fragment@1 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            pinctrl_CNC_GPIO: pinctrl_CNC_GPIO_pins {
+                pinctrl-single,pins = <                                           
+                                0x090 0x27  /* P9_11  GPIO        - xlim  */
+                                0x09C 0x27  /* P9_12  GPIO        - ylim  */
+                                0x034 0x27  /* P9_12  GPIO        - zlim */
+
+                                0x094 0x07  /* P9_14 113 GPIO     - xok */
+                                0x098 0x07  /* P9_15 113 GPIO     - yok */
+                                0x030 0x07  /* P9_16 113 GPIO     - zok */ 
+                >;
+            };
+	};
+	};
+
+	fragment@2 {
+        	        target = <&ocp>;
+               		 __overlay__ {
+                       		 test_helper: helper {
+                                compatible = "bone-pinmux-helper";
+                                pinctrl-names = "default";
+                                pinctrl-0 = <&pinctrl_CNC_GPIO>;
+                                status = "okay";
+                       		 };
+               		 };
+       		 };
+// This enables the PRU and assigns the GPIO pins to it for use in EGP mode.  
+   fragment@3 {  
+    target = <&pruss>;  
+    __overlay__ {  
+      status = "okay";  
+      pinctrl-names = "default";  
+      pinctrl-0 = <&pinctrl_CNC_PRU>;  
+    };  
+   };  
+};

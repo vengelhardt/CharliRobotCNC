@@ -1,0 +1,17 @@
+# Configuration simple
+#loadrt hal_bb_gpio user_leds=0,1,2,3 output_pins=812,811,816,815,915,923
+#addf bb_gpio.read                         servo-thread
+#addf bb_gpio.write                        servo-thread
+
+#net estop-out        <= bb_gpio.userled0
+#net xstep            <= bb_gpio.p8.out-12
+#net xdir             <= bb_gpio.p8.out-11
+#net ystep            <= bb_gpio.p8.out-16
+#net ydir             <= bb_gpio.p8.out-15
+#net zstep            <= bb_gpio.p9.out-15
+#net zdir             <= bb_gpio.p9.out-23
+#net astep            <= bb_gpio.p8.out-04
+#net adir             <= bb_gpio.p8.out-04
+#net spindle-cw       <= bb_gpio.p8.out-04
+#net spindle-pwm      <= bb_gpio.p8.out-04
+#net xenable          <= bb_gpio.p8.out-04
