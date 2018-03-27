@@ -4,7 +4,6 @@
 # Liens interessants :
 # http://derekmolloy.ie/beaglebone/beaglebone-gpio-programming-on-arm-embedded-linux/
 
-
 echo Initialisation des pins
 echo Declaration des variables :
 export SLOTS=/sys/devices/bone_capemgr.*/slots
@@ -14,7 +13,6 @@ export GPIO=/sys/class/gpio
 
 echo Chargement de la cape
 echo CNC | sudo tee $SLOTS
-
 
 echo Definition des GPIOs
 # echo 23 | sudo tee $GPIO/export		# Mettre le numéro de la colonne GPIO associé 23 pour 8.13 
