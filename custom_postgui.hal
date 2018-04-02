@@ -2,3 +2,5 @@
 # The commands in this file are run after the AXIS GUI (including PyVCP panel) starts
 
 sets spindle-at-speed true
+net remote-o101 halui.mdi-command-01 <= pyvcp.o101
+

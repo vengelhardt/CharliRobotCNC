@@ -1,0 +1,7 @@
+101 sub<br>(Sets X0 with offset of 1.5)
+G10 L20 P1 X1.5
+(Sets Y0 with offset of 1.5)
+G10 L20 P1 y1.5
+(Moves to Xo Y0)
+G1 X0 Y0 F900
+o101 endsub
