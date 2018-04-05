@@ -1,4 +1,7 @@
 .DS_Store
+<<<<<<< HEAD
 .my-mill.ini.swp
 CNC-00A0.dtbo
 autosave.halscope
+=======
+>>>>>>> ba5afc99e3e7513131a5d8ad20d7e0bcb41be5cf
