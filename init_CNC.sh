@@ -16,18 +16,18 @@ echo CNC | sudo tee $SLOTS
 
 echo Definition des GPIOs
 # echo 23 | sudo tee $GPIO/export		# Mettre le numéro de la colonne GPIO associé 23 pour 8.13 
-echo 66 | sudo tee $GPIO/export		# P8.03	xlim in	
-echo 69 | sudo tee $GPIO/export		# P8.05 ylim in
-echo 45 | sudo tee $GPIO/export         # P8.07 zlim in
+echo 30 | sudo tee $GPIO/export		# P9.11	xlim in	
+echo 31 | sudo tee $GPIO/export		# P9.13 ylim in
+echo 23 | sudo tee $GPIO/export         # P8.13 zlim in
 
 echo 67 | sudo tee $GPIO/export         # P8.04	xok out
 echo 68 | sudo tee $GPIO/export         # P8.06 yok out
 echo 44 | sudo tee $GPIO/export         # P8.08 zok out
 
 echo Definition de la direction
-echo "in" | sudo tee $GPIO/gpio66/direction
-echo "in" | sudo tee $GPIO/gpio69/direction
-echo "in" | sudo tee $GPIO/gpio45/direction
+echo "in" | sudo tee $GPIO/gpio30/direction
+echo "in" | sudo tee $GPIO/gpio31/direction
+echo "in" | sudo tee $GPIO/gpio23/direction
 
 echo "out" | sudo tee $GPIO/gpio67/direction
 echo "out" | sudo tee $GPIO/gpio68/direction
