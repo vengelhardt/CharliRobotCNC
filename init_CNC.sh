@@ -1,8 +1,8 @@
 #!/bin/bash
-# Indique au système que l'argument qui suit est le programme utilisé pour exécuter ce fichier
-# Pour l'instant le dts est stocké dans  home/machinekit/boneDeviceTree/overlay/DM-GPIO-Test.dts
+# Compile le dts et le déplace au bon endroit si pas encore défini
 # Liens interessants :
-# http://derekmolloy.ie/beaglebone/beaglebone-gpio-programming-on-arm-embedded-linux/
+
+sh ./build
 
 echo Initialisation des pins
 echo Declaration des variables :
