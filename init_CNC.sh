@@ -1,11 +1,31 @@
 #!/bin/bash
-# Compile le dts et le déplace au bon endroit si pas encore défini
-# Liens interessants :
 
-sh ./build
-sudo cp gmoccapy_lcd7 /usr/bin
-sudo cp gmoccapy_lcd7 /usr/share 
+# Compile et déplace le fichier cape si pas fait 
+export CAPE_FILE=/lib/firmware/CNC-00A0.dtbo
+if [ ! -f "$CAPE_FILE" ]; then
+	echo "Génération du fichier overlay"
+	dtc -O dtb -o CNC-00A0.dtbo -b 0 -@ CNC.dts
+	sudo cp CNC-00A0.dtbo /lib/firmware/
+else
+	echo "Overlay deja genere"
+fi
 
+# Installation du pilote écran 7 pouces si pas installé
+export LCD_FILE=/usr/share/gmoccapy_lcd7
+if [ ! -f "$LCD_FILE" ]; then
+        echo "Installation de l ecran"
+	git clone https://github.com/vichente1/gmoccapy_lcd7.git
+	cd gmoccapy_lcd7/	
+	sudo cp bin/gmoccapy_lcd7 /usr/bin/
+	sudo chmod a+x /usr/bin/gmoccapy_lcd7
+	sudo cp -r share/gmoccapy_lcd7/ /usr/share/
+	sudo apt-get update
+	sudo apt-get install matchbox
+	sudo cp keyboard-cnc.xml /usr/share/matchbox-keyboard
+	sudo chmod a+x /usr/share/matchbox-keyboard/keyboard-cnc.xml
+else
+	echo "Ecran deja installe"
+fi
 
 echo Initialisation des pins
 echo Declaration des variables :
