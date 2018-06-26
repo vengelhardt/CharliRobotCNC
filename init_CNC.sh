@@ -3,6 +3,9 @@
 # Liens interessants :
 
 sh ./build
+sudo cp gmoccapy_lcd7 /usr/bin
+sudo cp gmoccapy_lcd7 /usr/share 
+
 
 echo Initialisation des pins
 echo Declaration des variables :
