@@ -19,7 +19,7 @@ loadrt trivkins					# ???
 loadrt tp						# ???
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES kins=trivkins tp=tp
 loadrt hal_pru_generic prucode=/usr/lib/linuxcnc/xenomai/pru_generic.bin pru=0 num_stepgens=3 halname=hpg
-loadrt hal_bb_gpio user_leds=0,1,2,3 input_pins=911,913,813 output_pins=918,917,814
+loadrt hal_bb_gpio user_leds=0,1,2,3 input_pins=911,913,813 output_pins=918,917,814,926,924,810,815
 
 loadrt stepgen step_type=0,0,0
 addf hpg.update servo-thread
@@ -54,6 +54,7 @@ setp hpg.stepgen.00.control-type 0 			# Mode : 0 position, 1 vitesse
 net xpos-cmd axis.0.motor-pos-cmd => hpg.stepgen.00.position-cmd
 net xpos-fb hpg.stepgen.00.position-fb => axis.0.motor-pos-fb
 net xenable axis.0.amp-enable-out => hpg.stepgen.00.enable
+#net xenable axis.0.amp-enable-out => bb_gpio.p9.out-26
 
 net spindle-cmd-rpm     <= motion.spindle-speed-out
 net spindle-cmd-rpm-abs <= motion.spindle-speed-out-abs
@@ -78,6 +79,7 @@ setp hpg.stepgen.01.control-type 0
 net ypos-cmd axis.1.motor-pos-cmd => hpg.stepgen.01.position-cmd
 net ypos-fb hpg.stepgen.01.position-fb => axis.1.motor-pos-fb
 net yenable axis.1.amp-enable-out => hpg.stepgen.01.enable
+#net yenable axis.1.amp-enable-out => bb_gpio.p9.out-24
 
 #-----------------------------------------------------------------------------------------
 #                      Parametrage du stepgen : Axe Z
@@ -95,6 +97,7 @@ setp hpg.stepgen.02.control-type 0
 net zpos-cmd axis.2.motor-pos-cmd => hpg.stepgen.02.position-cmd
 net zpos-fb hpg.stepgen.02.position-fb => axis.2.motor-pos-fb
 net zenable axis.2.amp-enable-out => hpg.stepgen.02.enable
+#net zenable axis.2.amp-enable-out => bb_gpio.p8.out-10
 
 #-----------------------------------------------------------------------------------------
 #                                 Arret d'urgence

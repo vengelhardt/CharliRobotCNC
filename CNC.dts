@@ -27,14 +27,16 @@
             "P9.29",		/* ydir  :  0x194 mode 5*/
             "P8.11",		/* zstep :  0x034 mode 6*/
             "P8.12",		/* zdir  :  0x030 mode 6*/
-            "P8.07",		/* xlim  :  0x090 mode 27*/
-            "P8.09",		/* ylim  :  0x09C mode 27*/
-            "P8.11",		/* zlim  :  0x034 mode 27*/
-            "P8.08",		/* xok   :  0x094 mode 7*/
-            "P8.10",		/* yok   :  0x098 mode 7*/
-            "P8.12";		/* zok   :  0x038 mode 7*/
-
-
+            "P9.11",		/* xlim  :  0x070 mode 27*/
+            "P9.13",		/* ylim  :  0x074 mode 27*/
+            "P8.13",		/* zlim  :  0x024 mode 27*/
+            "P9.18",		/* xok   :  0x158 mode 7*/
+            "P9.17",		/* yok   :  0x15C mode 7*/
+            "P8.14",		/* zok   :  0x028 mode 7*/
+            "P8.15",		/* RELAY :  0x03C mode 7*/
+            "P9.26",		/* xen   :  0x180 mode 7*/
+            "P9.24",		/* yen   :  0x184 mode 7*/
+            "P8.10";		/* zen   :  0x098 mode 7*/
     fragment@0 {
         target = <&am33xx_pinmux>;
         __overlay__ {
@@ -55,13 +57,20 @@
         __overlay__ {
             pinctrl_CNC_GPIO: pinctrl_CNC_GPIO_pins {
                 pinctrl-single,pins = <                                           
-                                0x090 0x27  /* P9_11  GPIO        - xlim  */
-                                0x09C 0x27  /* P9_12  GPIO        - ylim  */
-                                0x034 0x27  /* P9_12  GPIO        - zlim */
+                                0x070 0x27  /* P9_11  GPIO        - xlim  */
+                                0x074 0x27  /* P9_13  GPIO        - ylim  */
+                                0x024 0x27  /* P8_13  GPIO        - zlim */
 
-                                0x094 0x07  /* P9_14 113 GPIO     - xok */
-                                0x098 0x07  /* P9_15 113 GPIO     - yok */
-                                0x030 0x07  /* P9_16 113 GPIO     - zok */ 
+                                0x158 0x07  /* P9_18 113 GPIO     - xok */
+                                0x15C 0x07  /* P9_17 113 GPIO     - yok */
+                                0x028 0x07  /* P8_14 113 GPIO     - zok */ 
+
+
+                                0x03C 0x07  /* P8_15 113 GPIO     - RELAY */
+                               
+				0x180 0x07  /* P9_26 113 GPIO     - xen */
+                                0x184 0x07  /* P9_24 113 GPIO     - yen */
+                                0x098 0x07  /* P8_10 113 GPIO     - zen */
                 >;
             };
 	};
