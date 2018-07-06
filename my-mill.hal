@@ -17,18 +17,15 @@
 loadusr -w ./init_CNC.sh		# Script parametrant les E/S
 loadrt trivkins					# ???
 loadrt tp						# ???
-loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES kins=trivkins tp=tp
+loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]SERVO_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES kins=trivkins tp=tp
 loadrt hal_pru_generic prucode=/usr/lib/linuxcnc/xenomai/pru_generic.bin pru=0 num_stepgens=3 halname=hpg
 loadrt hal_bb_gpio user_leds=0,1,2,3 input_pins=911,913,813 output_pins=918,917,814,926,924,810,815
 
 loadrt stepgen step_type=0,0,0
 addf hpg.update servo-thread
 addf hpg.capture-position servo-thread
-#addf stepgen.make-pulses base-thread
-#addf stepgen.capture-position servo-thread
 addf motion-command-handler servo-thread
 addf motion-controller servo-thread
-#addf stepgen.update-freq servo-thread
 addf bb_gpio.read servo-thread
 addf bb_gpio.write servo-thread
 #-----------------------------------------------------------------------------------------

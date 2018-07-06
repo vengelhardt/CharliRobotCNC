@@ -1,0 +1,5 @@
+O<CameraOffset> sub
+G10 L20 P1 X50.6
+G10 L20 P1 Y-34.9
+G1 X0 Y0 F900
+O<CameraOffset> endsub
